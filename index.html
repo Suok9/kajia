@@ -1,14 +1,588 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="/manifest.json" />
-    <title>Base44 APP</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 58th Birthday, Dad!</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap');
+
+:root {
+  --gold: #e8bd65;
+  --light-gold: #ffe8a9;
+  --black: #080807;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gold { color: var(--gold); }
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at center, #493414 0%, #171108 45%, #080807 85%);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid #c99c4944;
+  pointer-events: none;
+}
+
+.eyebrow {
+  color: var(--light-gold);
+  letter-spacing: 7px;
+  font-size: 11px;
+  animation: fadeUp 1.5s ease both;
+}
+
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(40px, 9vw, 95px);
+  margin: 25px 0 5px;
+  background: linear-gradient(90deg, #a87928, #fff0bd, #d6a441);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: glow 3s infinite alternate, fadeUp 1.5s ease both;
+}
+
+.hero .dad {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(50px, 12vw, 105px);
+  color: var(--light-gold);
+  animation: fadeUp 2s ease both;
+}
+
+.age {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(100px, 25vw, 220px);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--gold);
+  text-shadow: 0 0 50px #dba83d55;
+  margin: 10px 0;
+  animation: appear 2s ease both;
+}
+
+.hero p {
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: #e8d5ae;
+  margin: 20px 0 35px;
+}
+
+.btn {
+  border: 1px solid var(--gold);
+  background: linear-gradient(120deg, #bd8730, #f9dfa0, #bd8730);
+  color: #160f04;
+  padding: 16px 32px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 30px #d9a63d88;
+}
+
+section {
+  padding: 100px 22px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: clamp(25px, 5vw, 42px);
+  margin-bottom: 25px;
+}
+
+.divider {
+  width: 100px;
+  height: 2px;
+  background: var(--gold);
+  margin: 25px auto;
+}
+
+.intro {
+  background: linear-gradient(#080807, #171006, #080807);
+}
+
+.intro p, .letter p {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 2;
+  color: #d8d1c2;
+  font-size: 15px;
+}
+
+.letter {
+  background: radial-gradient(ellipse, #352510, #080807 75%);
+}
+
+.letter-card {
+  max-width: 750px;
+  margin: 35px auto;
+  padding: 45px 28px;
+  border: 1px solid #b58a3b77;
+  background: #120e08cc;
+  box-shadow: 0 0 50px #bd8a3020;
+}
+
+.signature {
+  font-family: 'Great Vibes', cursive;
+  color: var(--light-gold);
+  font-size: 38px;
+  margin-top: 30px;
+}
+
+.prayers {
+  background: #0d0b07;
+}
+
+.prayer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  max-width: 950px;
+  margin: 40px auto;
+}
+
+.prayer {
+  padding: 30px 20px;
+  border: 1px solid #a67e3c55;
+  background: linear-gradient(145deg, #211809, #0c0b08);
+  transition: .4s;
+}
+
+.prayer:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold);
+}
+
+.prayer h3 {
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  margin: 12px 0;
+}
+
+.prayer p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #ccc2ae;
+}
+
+.icon { font-size: 32px; }
+
+.message {
+  background: radial-gradient(ellipse, #30200b, #080807 80%);
+}
+
+.hidden-message {
+  display: none;
+  max-width: 650px;
+  margin: 35px auto;
+  padding: 30px;
+  border: 1px solid var(--gold);
+  line-height: 2;
+  color: #f4dfb4;
+  animation: fadeUp 1s ease;
+}
+
+footer {
+  padding: 65px 20px;
+  background: #050504;
+  border-top: 1px solid #a77d3455;
+  text-align: center;
+}
+
+footer h2 {
+  font-family: 'Great Vibes', cursive;
+  color: var(--gold);
+  font-size: 55px;
+}
+
+footer p {
+  color: #aaa08c;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-top: 20px;
+}
+
+.music {
+  position: fixed;
+  z-index: 10;
+  bottom: 20px;
+  right: 20px;
+  background: #bd8730;
+  border: 0;
+  padding: 13px 17px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: scale(.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 5px #d6a441); }
+  to { filter: drop-shadow(0 0 25px #f8d78a); }
+}
+
+@media(max-width: 600px) {
+  section { padding: 75px 18px; }
+  .letter-card { padding: 35px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<header class="hero">
+  <div class="eyebrow">A CELEBRATION OF LIFE • NOVEMBER 25</div>
+  <h1>HAPPY BIRTHDAY</h1>
+  <div class="dad">Dear Dad</div>
+  <div class="age">58</div>
+  <p>YEARS OF STRENGTH • WISDOM • GREATNESS</p>
+  <button class="btn" onclick="celebrate()">
+    CELEBRATE WITH ME ✨
+  </button>
+</header>
+
+<section class="intro">
+  <div class="section-title">A Special Day. A Special Man.</div>
+  <div class="divider"></div>
+  <p>
+    November 25, 1968. A remarkable life began.
+    Today, 58 years later, we celebrate not merely
+    another birthday, but a father, a mentor, a provider,
+    and a man whose sacrifices and dedication have
+    made an immeasurable difference in the lives of
+    those around him.
+    <br><br>
+    Dad, today is all about you.
+  </p>
+</section>
+
+<section class="letter">
+  <div class="section-title">A Letter From Your Son</div>
+  <div class="divider"></div>
+
+  <div class="letter-card">
+    <p>
+      Dear Dad,<br><br>
+
+      Happy 58th Birthday! ❤️<br><br>
+
+      Today, I am grateful to God for the gift of having
+      you as my father. Thank you for your sacrifices,
+      your guidance, your wisdom, and the countless
+      ways you have continued to provide for and
+      support our family.<br><br>
+
+      I may not always express it, but I recognise and
+      appreciate everything you do. Your strength,
+      hard work, and dedication inspire me to become
+      a better person and someone you can always
+      be proud of.<br><br>
+
+      I hope that one day, I will be able to give back
+      even a fraction of everything you have given me.
+      I want to become a man whose achievements
+      bring you joy and whose character makes you proud
+      to call him your son.<br><br>
+
+      Thank you for being my father. Thank you for
+      everything, including the things I may never
+      fully understand or be able to repay.<br><br>
+
+      I love you, Dad. Happy Birthday!
+    </p>
+
+    <div class="signature">With love, Your Son ❤️</div>
+  </div>
+</section>
+
+<section class="prayers">
+  <div class="section-title">My Prayers For You</div>
+  <div class="divider"></div>
+
+  <div class="prayer-grid">
+
+    <div class="prayer">
+      <div class="icon">🙏</div>
+      <h3>Good Health</h3>
+      <p>
+        May God bless you with strength, good health,
+        vitality, and many more beautiful years.
+      </p>
+    </div>
+
+    <div class="prayer">
+      <div class="icon">🕊️</div>
+      <h3>Peace</h3>
+      <p>
+        May your heart always find peace, your home
+        find happiness, and your days find joy.
+      </p>
+    </div>
+
+    <div class="prayer">
+      <div class="icon">✨</div>
+      <h3>Prosperity</h3>
+      <p>
+        May you enjoy the fruits of your labour and
+        experience blessings beyond your expectations.
+      </p>
+    </div>
+
+    <div class="prayer">
+      <div class="icon">❤️</div>
+      <h3>Long Life</h3>
+      <p>
+        May you live long enough to witness the
+        fulfilment of your dreams and enjoy your legacy.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="message">
+  <div class="section-title">One More Thing, Dad...</div>
+  <div class="divider"></div>
+
+  <p style="color:#d8d1c2;line-height:2">
+    There is something I want you to know.
+    Tap below.
+  </p>
+
+  <br>
+
+  <button class="btn" onclick="revealMessage()">
+    OPEN MY HEART ❤️
+  </button>
+
+  <div class="hidden-message" id="secret">
+    Dad, I know I still have a long way to go, and
+    there is so much I hope to accomplish in life.
+    But one of my greatest desires is to become
+    someone you will always be proud of.
+
+    <br><br>
+
+    I want you to look at me someday and know
+    that your sacrifices were not in vain.
+    I want to make you proud, support you, and
+    give you reasons to smile just as you have
+    given me reasons to keep pushing forward.
+
+    <br><br>
+
+    You are appreciated more than words can express.
+
+    <br><br>
+
+    **I LOVE YOU, DAD.**
+  </div>
+</section>
+
+<footer>
+  <h2>Happy 58th Birthday!</h2>
+  <div class="divider"></div>
+  <p>NOVEMBER 25, 1968 — FOREVER CELEBRATED</p>
+  <br>
+  <p>MADE WITH LOVE ❤️ BY YOUR SON</p>
+</footer>
+
+<button class="music" id="musicBtn" onclick="toggleMusic()">
+  ♫ Play Music
+</button>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let fireworks = [];
+let celebration = false;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+function createParticles() {
+  particles = Array.from({length: 100}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 0.5,
+    speed: Math.random() * 0.6 + 0.2,
+    alpha: Math.random()
+  }));
+}
+createParticles();
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.y -= p.speed;
+    if (p.y < 0) p.y = canvas.height;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,205,105,${p.alpha})`;
+    ctx.fill();
+  });
+
+  fireworks = fireworks.filter(f => f.life > 0);
+
+  fireworks.forEach(f => {
+    f.x += f.vx;
+    f.y += f.vy;
+    f.vy += 0.025;
+    f.life--;
+
+    ctx.beginPath();
+    ctx.arc(f.x, f.y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,210,120,${f.life / 70})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+function launchFirework(x, y) {
+  for (let i = 0; i < 65; i++) {
+    let angle = Math.random() * Math.PI * 2;
+    let speed = Math.random() * 4 + 1;
+
+    fireworks.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 70
+    });
+  }
+}
+
+function celebrate() {
+  celebration = true;
+
+  for (let i = 0; i < 12; i++) {
+    setTimeout(() => {
+      launchFirework(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height * 0.6
+      );
+    }, i * 250);
+  }
+
+  document.querySelector(".intro").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function revealMessage() {
+  const msg = document.getElementById("secret");
+  msg.style.display = "block";
+  launchFirework(canvas.width / 2, canvas.height / 3);
+}
+
+// Original ambient music generated in the browser.
+let audio;
+let oscillators = [];
+let playing = false;
+
+function toggleMusic() {
+  const button = document.getElementById("musicBtn");
+
+  if (!audio) {
+    audio = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  if (playing) {
+    oscillators.forEach(o => {
+      try { o.stop(); } catch(e) {}
+    });
+    oscillators = [];
+    playing = false;
+    button.textContent = "♫ Play Music";
+    return;
+  }
+
+  audio.resume();
+
+  const notes = [261.63, 329.63, 392, 523.25];
+
+  notes.forEach((frequency, i) => {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = frequency;
+    gain.gain.value = 0.025;
+
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.start();
+
+    oscillators.push(osc);
+  });
+
+  playing = true;
+  button.textContent = "♫ Stop Music";
+}
+</script>
+
+</body>
 </html>
